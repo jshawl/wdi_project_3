@@ -4,7 +4,7 @@ var DB = require("../../config/connection");
 var Post = DB.models.Post;
 
 
-function error(response, message){
+function error(response, message){ // move this method to a global to DRY up code.
   response.status(500);
   response.json({error: message})
 }
@@ -56,3 +56,4 @@ router.delete("/posts/:id", function(req, res){
 });
 
 module.exports = router
+// excellent controller! helpful code comments and error handling!!

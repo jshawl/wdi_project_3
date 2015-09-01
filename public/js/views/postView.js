@@ -16,6 +16,8 @@ PostView.prototype.template = function(){
   var html = template({post: this.post, authorship: (currentUser ? currentUser.id === this.post.userId : null)});
   html = $(html);                            //Make html string a jquery object
   return html;
+  // have seen these couple of lines a few times. Can you think of a way to abstract this code into something
+  // reusable?
 };
 
 PostView.prototype.listen = function(){
@@ -36,7 +38,10 @@ PostView.prototype.populateCommentsDiv = function(){
     }.bind(this));
     var createCommentView = new CreateCommentView(this);
     this.$elements.commentsDiv.hide();
-    if (currentUser) this.$elements.commentsDiv.append(createCommentView.$el);
+    if (currentUser) { 
+      this.$elements.commentsDiv.append(createCommentView.$el);
+      // cool to see you not use optional curlies, but this frequently trips me up in my own code.
+    }
     this.$elements.commentsDiv.slideDown();
     this.$elements.showCommentsButton.text("Hide Comments")
   }.bind(this));
@@ -51,7 +56,7 @@ PostView.prototype.toggleCommentsDiv = function(){
 PostView.prototype.renderEditView = function(){
   var editPostView = new EditPostView(this.post);
   console.log(editPostView);
-  this.$el.replaceWith(editPostView.$el);  //Let's find a less jarring way to transition
+  this.$el.replaceWith(editPostView.$el);  //Let's find a less jarring way to transition fade out, fade in?
 }
 
 PostView.prototype.postEditTemplate = function(post){

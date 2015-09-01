@@ -17,7 +17,7 @@ CreateCommentView.prototype.template = function(){
 CreateCommentView.prototype.listen = function(){
   this.$elements.submitButton.on("click", function(){
     this.createComment();
-  }.bind(this))
+  }.bind(this)) // i've noticed a few .bind()s and a few var self = this. They both work, but try using one or the other for consistency.
 };
 
 CreateCommentView.prototype.createComment = function(){
@@ -28,10 +28,10 @@ CreateCommentView.prototype.createComment = function(){
     author: currentUser.username
   };
 
-  Comment.create(data).then(function(newComment){  //this is doing too much
+  Comment.create(data).then(function(newComment){  //this is doing too much i like this solution!
     console.log("Listening from createCommentView.js")
     this.$el.replaceWith();
-    this.postView.$elements.commentsDiv.append(new CommentView(newComment).$el); //gross
+    this.postView.$elements.commentsDiv.append(new CommentView(newComment).$el); //gross maybe separate lines will reduce the grossness, but i still like this!
     this.postView.$elements.commentsDiv.append(new CreateCommentView(this.postView).$el)
   }.bind(this))
 }

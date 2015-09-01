@@ -20,6 +20,7 @@
             <ul class="nav navbar-nav">
                 <li>
                     <a href="#">About</a>
+		    <!-- consider removing these links until they do something -->
                 </li>
                 <li>
                     <a href="#">Services</a>
@@ -32,12 +33,12 @@
                   <a href="/signout">Sign Out</a>
                   {{else}}
                   <a href='/auth/github'>Log in with Github</a>
-                    <!-- <a href="#">Github Login</a> -->
+                    <!-- <a href="#">Github Login</a> remove commented out code -->
                   {{/if}}
                 </li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
+        <!-- /.navbar-collapse this is a great html comment! -->
     </div>
     <!-- /.container -->
 </nav>
@@ -49,7 +50,7 @@
     <div class="col-md-8">
       <h1 class="page-header">WDIssues</h1>
       <div class='posts'></div><br>
-      <button class='createPostView btn btn-primary btn-xs'><span class=" glyphicon glyphicon-pencil "></span>New Issue</button> <!--don't love this class name -->
+      <button class='createPostView btn btn-primary btn-xs'><span class=" glyphicon glyphicon-pencil "></span>New Issue</button> <!--don't love this class name ? -->
       <div class='newPost'></div>
 
       <!-- Pager -->
@@ -87,6 +88,7 @@
     <div class="row">
         <div class="col-lg-6">
             <ul class="list-unstyled">
+	        <!-- this would be such a cool feature but doesn't seem to work. Please remove inoperable features -->
                 <li><a href="#">WDI Project1</a>
                 </li>
                 <li><a href="#">Deployment</a>
@@ -108,6 +110,7 @@
                 </li>
                 <li><a href="#">WDI Project2</a>
                 </li>
+		<!-- can you think of a way to have handlebars generate these categories -->
             </ul>
         </div>
         <!-- /.col-lg-6 -->
@@ -119,6 +122,7 @@
       <div class="well">
           <h4>Hot Issue Questions</h4>
           <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p> -->
+	  <!-- what makes an issue "hot"? most views? most comments? This too, would be a great feature! -->
           <a href="#">Trouble seeding database?</a>
           <a href="#">Unable to deploy to heroku</a>
           <a href="#">Git merge conflict</a>
@@ -144,6 +148,7 @@
   <script id="postTemplate" type="text/x-handlebars-template">
     <div class='post'>
       <h3>\{{ post.title }}</h3>
+      could also use res.sendfile http://expressjs.com/api.html#res.sendFile to prevent handlebars rendering this file.
       <h4>by: \{{ post.author }}</h4>
       <p> status: \{{ post.status }}</p>
       <p>\{{ post.body }}</p>
@@ -170,7 +175,7 @@
   <script id="createPostTemplate" type="text/x-handlebars-template">
     <div class='createPost'>
       <input name='title' placeholder="Title"><br>
-      <textarea rows="5" cols="70" name='body' placeholder="I wanted... I tried... I expected... the result was..."></textarea>
+      <textarea rows="5" cols="70" name='body' placeholder="I wanted... I tried... I expected... the result was... EXCELLENT! :)"></textarea>
       <button class='createPost btn btn-primary btn-xs'>Post</button>
       <button class='cancel btn btn-danger btn-xs'>Cancel</button>
     </div>
@@ -193,9 +198,11 @@
   <script src="/js/views/commentView.js"></script>
   <script src="/js/views/createCommentView.js"></script>
   <script src="/js/script.js"></script>
+  <!-- consider using a build tool like grunt or gulp to concat and minify assets - http://gruntjs.com/ and http://gulpjs.com/ -->
 
   <!-- jQuery -->
   <!-- <script src="/js/jquery.js"></script> -->
 
   <!-- Bootstrap Core JavaScript -->
   <script src="/js/bootstrap.min.js"></script>
+  <!-- this likely wont affect your app, but load all vendor js before your own js to prevent conflicts -->

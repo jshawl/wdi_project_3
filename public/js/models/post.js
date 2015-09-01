@@ -36,7 +36,7 @@ Post.create = function(postData){
     contentType: "application/json"
   })
   .then(function(postData){
-    return new Post(postData);   //Maybe include some error handling
+    return new Post(postData);   //Maybe include some error handling++
   })
   return request;
 };
@@ -52,6 +52,7 @@ Post.prototype.update = function(info){
   var request = $.ajax({
     url: url,
     method: "patch",        //Need to make this put - can do a updatePartial and use patch at some point but currently we're using this for a full reload
+                            // not sure I follow here. Patch is a great candidate here. if info only has a title, isn't that the only thing that will be updated?
     data: JSON.stringify(info),
     contentType: "application/json"
   })

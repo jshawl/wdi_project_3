@@ -12,7 +12,7 @@ $(document).ready(function(){
         $(".posts").append(view.$el);
       })
     })
-    if (!currentUser) $('button.createPostView').hide();
+    if (!currentUser) $('button.createPostView').hide(); // clever! remember to restrict backend functionality as well.
   })
 
 

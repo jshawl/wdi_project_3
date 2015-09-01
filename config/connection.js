@@ -14,6 +14,7 @@ if (process.env.DATABASE_URL) {
   //sequelize = new Sequelize('postgres://nolds:password@localhost:5432/wdissues_db')
    sequelize = new Sequelize("postgres:///wdissues_db");
   //  sequelize = new Sequelize('postgres://nolds:password@localhost:5432/wdissues_db')
+  //  remove commented out code in the future.
 
 }
 
@@ -21,7 +22,7 @@ var Post = sequelize.import("../app/models/post");
 var Comment = sequelize.import("../app/models/comment");
 var User = sequelize.import("../app/models/user");
 
-Comment.belongsTo(Post, {onDelete: "CASCADE"});
+Comment.belongsTo(Post, {onDelete: "CASCADE"}); //nice!
 Post.hasMany(Comment);
 Post.belongsTo(User);
 User.hasMany(Post);
@@ -30,7 +31,7 @@ User.hasMany(Comment);
 
 module.exports = {
   sql: Sequelize,
-  do: sequelize,
+  do: sequelize, // what does the `do` key stand for? is it used elsewhere?
   models: {
     Post: Post,
     Comment: Comment,

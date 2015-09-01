@@ -53,7 +53,7 @@ passport.use(new GitHubStrategy({
  }
 ));
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'keyboard cat', // could also move session secret to env.js
   resave: false,
   saveUninitialized: false
 }));
@@ -79,7 +79,7 @@ app.use("/", usersController);
 
 app.get('/auth/github',
   passport.authenticate('github'),
-  function(req, res){});
+  function(req, res){}); // i think you can remove this function callback, as it's never invoked anyway
 
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
@@ -91,8 +91,10 @@ app.get('/auth/github/callback',
   });
 
   app.get('/currentUserData', function(req, res) {
+  // this is a really clever implementation! will be keeping an eye out for how to hack this
+  // i.e. can savvy web developers fake being some other user?
     console.log(req.user);
-    if (req.user === undefined) {
+    if (req.user === undefined) { // or if(req.user)
         // The user is not logged in
         res.json({ });
     } else {
@@ -104,9 +106,13 @@ app.get('/auth/github/callback',
 app.get('/signout', function(req, res){
   console.log(req.user);
   req.session.destroy();
-  console.log(req.user);
+  console.log(req.user); //nice for debugging, be sure to remove console logs
   res.redirect("/");
 })
+
+// I dont see any thing on the back end preventing users from creating
+// new posts or comments.
+// consider having another `app.use` that restricts routes.
 
 app.set('port', (process.env.PORT || 3000));
 

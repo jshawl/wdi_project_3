@@ -1,5 +1,5 @@
 var CreatePostView = function(){
-  this.$el = this.template();
+  this.$el = this.template(); // clever putting this in a prototype method!
   this.$elements = {
     titleInput: this.$el.find("input[name=title]"),
     bodyTextArea: this.$el.find("textArea[name=body]"),
@@ -38,11 +38,13 @@ CreatePostView.prototype.createPost = function(){
       title: this.$elements.titleInput.val(),
       status:"open",
       body: this.$elements.bodyTextArea.val(),
-      userId: currentUser.id,
+      userId: currentUser.id, // is this a global? might be useful to put in method so this can't be changed in the console.
+                              // e.g. getCurrentUser()
       author: currentUser.username
     };
     Post.create(data).then(function(newPost) {
       var view = new PostView(newPost);    //This should be returned or something, no longer self rendering
+                                           // not sure I follow here, but this is a helpful comment for future you!
       console.log(view);
       $('.posts').append(view.$el);
       this.$el.replaceWith();

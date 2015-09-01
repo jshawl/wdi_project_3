@@ -22,6 +22,8 @@ var comments = [
 ]
 
 User.create(user).then(function(){
+  // can you think of a way to have dynamic ids for post and user?
+  // I think this will not work if you destroy all entries and try reseeding a second time
   return Post.bulkCreate(posts)
 }).then(function(){
   return Comment.bulkCreate(comments)

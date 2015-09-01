@@ -1,12 +1,13 @@
 var express = require("express");
 var router = express.Router();
+// can the above two be loaded in main index.js file? why re-require here?
 var DB = require("../../config/connection");
 var Comment = DB.models.Comment;
 var Post = DB.models.Post;
 
 function error(response, message){
   response.status(500);
-  response.json({error: message});
+  response.json({error: message}); //helpful!!
 };
 
 router.get("/comments", function(req, res){
@@ -18,6 +19,7 @@ router.get("/comments", function(req, res){
 router.post("/comments", function(req, res){
   console.log("request body:", req.body);
   Comment.create(req.body).then(function(comment){
+  // consider adding in error handling here. 
     res.json(comment);
   })
 })
@@ -36,7 +38,7 @@ router.get("/posts/:id/comments", function(req, res){
 router.post("/posts/:id/comments", function(req, res){
   Post.findById(req.params.id).then(function(post){
     if(!post) return error(res, "not found");
-    post.createComment(req.body)
+    post.createComment(req.body) // where is `createComment` coming from? Love this implementation!
     .then(function(comments){
       res.json(comments);
     });

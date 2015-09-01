@@ -10,6 +10,8 @@ function error(response, message){
 
 router.get("/users", function(req, res){
   //get all users
+  // some people might be upset if they knew there info was being exposed like this. I recommend creating an admin role
+  // who are the only ones who can see this.
   User.findAll().then(function(users){
     res.json(users);
   })

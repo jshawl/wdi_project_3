@@ -14,10 +14,12 @@ Comment.fetch = function(postId){
     for (var i = 0; i < response.length; i++){
       comments.push(new Comment(response[i]))
     }
+    // excellent!!!
     return comments;
   })
   .fail(function(response){
     console.log("failed to fetch comments for Post with id: " +postId);
+    // maybe include a message for the user to see?
   })
   return request;
 };
